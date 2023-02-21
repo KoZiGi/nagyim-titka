@@ -30,9 +30,12 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.sass"
+              "src/styles.sass",
+              "node_modules/bootstrap/scss/booststrap.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/bootstrap-icons/font/bootstrap-icons.css"
+            ]
           },
           "configurations": {
             "production": {
