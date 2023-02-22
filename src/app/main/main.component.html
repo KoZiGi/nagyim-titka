@@ -1,10 +1,17 @@
 <button data-bs-target="#uploadModal" data-bs-toggle="modal">ASD</button>
+
 <app-upload-modal/>
-<div *ngFor="let recipe of recipes" class="card mb-3">
-    <!--<img src="" class="card-img-top" alt="...">-->
+
+<div class="container d-flex flex-wrap">
+  <div *ngFor="let recipe of recipes" class="card m-2">
+    <img src="{{recipe.image}}" class="card-img-top" alt="...">
     <div class="card-body">
       <h5 class="card-title">{{recipe.title}}</h5>
       <p class="card-text">{{recipe.description}}</p>
     </div>
+    <div class="card-footer">
+      <button class="btn btn-primary" routerLink="recipes/{{recipe.ID}}" >Megnézem</button>
+    </div>  
+  </div>
 </div>
   

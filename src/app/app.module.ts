@@ -10,6 +10,8 @@ import { UploadModalComponent } from './upload-modal/upload-modal.component';
 import { BodyComponent } from './body/body.component';
 import { MainComponent } from './main/main.component';
 import { FormsModule } from '@angular/forms';
+import { ReceptComponent } from './recept/recept.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -17,7 +19,8 @@ import { FormsModule } from '@angular/forms';
     FooterComponent,
     UploadModalComponent,
     BodyComponent,
-    MainComponent
+    MainComponent,
+    ReceptComponent
   ],
   imports: [
     BrowserModule,
