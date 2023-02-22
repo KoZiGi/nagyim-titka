@@ -8,6 +8,7 @@ import { FooterComponent } from './footer/footer.component';
 import { UploadModalComponent } from './upload-modal/upload-modal.component';
 import { BodyComponent } from './body/body.component';
 import { MainComponent } from './main/main.component';
+import { ReceptComponent } from './recept/recept.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { MainComponent } from './main/main.component';
     FooterComponent,
     UploadModalComponent,
     BodyComponent,
-    MainComponent
+    MainComponent,
+    ReceptComponent
   ],
   imports: [
     BrowserModule,
