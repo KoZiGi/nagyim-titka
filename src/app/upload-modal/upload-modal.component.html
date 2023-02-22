@@ -6,25 +6,38 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
+          <h3>Étel információk</h3>
           <div class="mb-3">
               <label class="form-label">Étel neve</label>
-              <input type="text" class="form-control">
-          </div>
-          <div class="mb-3">
-              <label>Hozzávalók:</label>
-
+              <input type="text" class="form-control" [(ngModel)]="newRecipe.title">
           </div>
           <div class="mb-3">
               <label class="form-label">Étel Leírása</label>
-              <textarea class="form-control" [value]="description"></textarea>
+              <textarea class="form-control" [(ngModel)]="newRecipe.description"></textarea>
           </div>
           <div class="mb-3">
               <label class="form-label">Étel Elkészítése</label>
-              <textarea class="form-control" [value]="makingof"></textarea>
+              <textarea class="form-control" [(ngModel)]="newRecipe.makingof"></textarea>
+          </div>
+          <h3>Hozzávalók</h3>
+          <div class="mb-3">
+              <label class="form-label">Hozzávaló neve:</label>
+              <input type="text" class="form-control" placeholder="Búzaliszt" [(ngModel)]="newIngredient.name">
+          </div>
+          <label class="form-label">Hozzávaló mennyiség - mértékegysége:</label>
+          <div class="mb-3 input-group">
+              <input type="number" class="form-control" placeholder="500" [(ngModel)]="newIngredient.amount">
+              <span class="input-group-text">-</span>
+              <input type="text" class="form-control" placeholder="kg" [(ngModel)]="newIngredient.unit">
+          </div>
+          <button class="btn btn-primary" (click)="AddIngredient()"><i class="bi bi-plus-lg"></i> Hozzáadás</button>
+          <div class="recipes">
+            <div class="recipe" @fade *ngFor="let ingredient of ingredients; index as i;">{{ingredient.name}} - {{ingredient.amount}} {{ingredient.unit}} <i (click)="DeleteIngredient(i)" class="bi bi-x-lg"></i></div>
           </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-success" (click)="Upload()"><i class="bi bi-plus-lg"></i></button>
         </div>
       </div>
     </div>

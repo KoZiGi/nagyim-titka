@@ -17,12 +17,12 @@ export class RecipesService {
       params:params as any
     });
   }
-  async Post(data:any):Promise<Observable<any>>{
+  async Post(data:Params):Promise<Observable<any>>{
     return await this.http.post(this.backendURL, data, {
       headers:{'Content-Type':'application/json'}
     });
   }
-  async Patch(data:any):Promise<Observable<any>>{
+  async Patch(data:Params):Promise<Observable<any>>{
     return await this.http.patch(this.backendURL, data, {
       headers:{'Content-Type':'application/json'}
     });
