@@ -9,7 +9,7 @@ import { RecipesService } from '../recipes.service';
 })
 export class MainComponent {
   constructor(private service:RecipesService){}
-  recipes:Recipe={}as Recipe;
+  recipes:Recipe[]=[];
   async getdata() {
     await this.service.Get({
       table:"recipes"

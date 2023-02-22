@@ -1,6 +1,6 @@
 <button data-bs-target="#uploadModal" data-bs-toggle="modal">ASD</button>
 <app-upload-modal/>
-<div ng-for="let recipe of recipes" class="card mb-3">
+<div *ngFor="let recipe of recipes" class="card mb-3">
     <!--<img src="" class="card-img-top" alt="...">-->
     <div class="card-body">
       <h5 class="card-title">{{recipe.title}}</h5>
