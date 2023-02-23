@@ -1,6 +1,6 @@
 <button data-bs-target="#uploadModal" data-bs-toggle="modal">ASD</button>
 
-<app-upload-modal/>
+<app-upload-modal (emitter)="getdata()" />
 
 <div class="container d-flex flex-wrap" (load)="getdata()">
   <div *ngFor="let recipe of recipes" class="card m-2">

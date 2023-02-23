@@ -1,5 +1,5 @@
 import { state, transition, animate, style, trigger, keyframes } from '@angular/animations';
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { firstValueFrom, map } from 'rxjs';
 import type {Recipe, Ingredient} from '../recipe';
 import { RecipesService } from '../recipes.service';
@@ -21,6 +21,7 @@ import { RecipesService } from '../recipes.service';
   ]
 })
 export class UploadModalComponent {
+  @Output() emitter = new EventEmitter<boolean>();
   newRecipe:Recipe = {} as Recipe;
   newIngredient:Ingredient = {} as Ingredient;
   ingredients:Ingredient[] = [];
@@ -29,16 +30,18 @@ export class UploadModalComponent {
     this.service.Post({
       table:'food',
       data:this.newRecipe
-    }).pipe(map(e=>{
-      return this.ingredients.map(g=>{return {...g, foodID:Number(e.insertedId)}})
-    })).subscribe(data=>{
-      data.forEach(t=>{
-        this.service.Post({table:'ingredients', data:t}).subscribe(n=>{
-          if (n.insertedId){
-            this.newRecipe={} as Recipe;
-            this.newIngredient = {} as Ingredient;
-            this.ingredients = [];
-          }
+    }).pipe(
+      map(e=>{
+        return this.ingredients.map(g=>{return {...g, foodID:Number(e.insertedId)}})
+      })).subscribe(data=>{
+        data.forEach(t=>{
+          this.service.Post({table:'ingredients', data:t}).subscribe(n=>{
+            if (n.insertedId){
+              this.newRecipe={} as Recipe;
+              this.newIngredient = {} as Ingredient;
+              this.ingredients = [];
+              this.emitter.emit(true);
+            }
         });
       })
     })
