@@ -17,8 +17,8 @@ export class RecipesService {
       params:params as any
     });
   }
-  async Post(data:Params):Promise<Observable<any>>{
-    return await this.http.post(this.backendURL, data, {
+  Post(data:Params):Observable<any>{
+    return this.http.post(this.backendURL, data, {
       headers:{'Content-Type':'application/json'}
     });
   }
