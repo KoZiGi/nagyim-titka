@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2023. Feb 21. 13:00
+-- Létrehozás ideje: 2023. Feb 23. 13:10
 -- Kiszolgáló verziója: 10.4.6-MariaDB
 -- PHP verzió: 7.3.8
 
@@ -38,17 +38,12 @@ CREATE TABLE `food` (
   `image` varchar(255) COLLATE utf8_hungarian_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci;
 
--- --------------------------------------------------------
-
 --
--- Tábla szerkezet ehhez a táblához `foodingredients`
+-- A tábla adatainak kiíratása `food`
 --
 
-CREATE TABLE `foodingredients` (
-  `ID` int(11) NOT NULL,
-  `foodID` int(11) NOT NULL,
-  `ingredientID` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci;
+INSERT INTO `food` (`ID`, `title`, `description`, `makingof`, `image`) VALUES
+(22, 'Pirítós kenyér', 'Egy finom pirítós kenyér', 'Fogj egy pirítót\nDobd bele a kenyeret\nVedd ki\nFürödj vele egyet\nJó étvágyat!', '');
 
 -- --------------------------------------------------------
 
@@ -58,34 +53,19 @@ CREATE TABLE `foodingredients` (
 
 CREATE TABLE `ingredients` (
   `ID` int(11) NOT NULL,
+  `foodID` int(11) NOT NULL,
   `name` varchar(255) COLLATE utf8_hungarian_ci NOT NULL,
   `amount` int(11) NOT NULL,
   `unit` varchar(15) COLLATE utf8_hungarian_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci;
 
--- --------------------------------------------------------
-
 --
--- A nézet helyettes szerkezete `recipeingredients`
--- (Lásd alább az aktuális nézetet)
+-- A tábla adatainak kiíratása `ingredients`
 --
-CREATE TABLE `recipeingredients` (
-`ID` int(11)
-,`foodID` int(11)
-,`ingredientID` int(11)
-,`name` varchar(255)
-,`amount` int(11)
-,`unit` varchar(15)
-);
 
--- --------------------------------------------------------
-
---
--- Nézet szerkezete `recipeingredients`
---
-DROP TABLE IF EXISTS `recipeingredients`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `recipeingredients`  AS  select `foodingredients`.`ID` AS `ID`,`food`.`ID` AS `foodID`,`ingredients`.`ID` AS `ingredientID`,`ingredients`.`name` AS `name`,`ingredients`.`amount` AS `amount`,`ingredients`.`unit` AS `unit` from ((`foodingredients` join `ingredients` on(`ingredients`.`ID` = `foodingredients`.`ingredientID`)) join `food` on(`food`.`ID` = `foodingredients`.`foodID`)) ;
+INSERT INTO `ingredients` (`ID`, `foodID`, `name`, `amount`, `unit`) VALUES
+(1, 22, 'Pirító', 1, 'db'),
+(2, 22, 'Kenyér', 1, 'szelet');
 
 --
 -- Indexek a kiírt táblákhoz
@@ -98,18 +78,11 @@ ALTER TABLE `food`
   ADD PRIMARY KEY (`ID`);
 
 --
--- A tábla indexei `foodingredients`
---
-ALTER TABLE `foodingredients`
-  ADD PRIMARY KEY (`ID`),
-  ADD KEY `foodID` (`foodID`),
-  ADD KEY `ingredientID` (`ingredientID`);
-
---
 -- A tábla indexei `ingredients`
 --
 ALTER TABLE `ingredients`
-  ADD PRIMARY KEY (`ID`);
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `foodID` (`foodID`);
 
 --
 -- A kiírt táblák AUTO_INCREMENT értéke
@@ -119,30 +92,23 @@ ALTER TABLE `ingredients`
 -- AUTO_INCREMENT a táblához `food`
 --
 ALTER TABLE `food`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT a táblához `foodingredients`
---
-ALTER TABLE `foodingredients`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT a táblához `ingredients`
 --
 ALTER TABLE `ingredients`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Megkötések a kiírt táblákhoz
 --
 
 --
--- Megkötések a táblához `foodingredients`
+-- Megkötések a táblához `ingredients`
 --
-ALTER TABLE `foodingredients`
-  ADD CONSTRAINT `foodingredients_ibfk_1` FOREIGN KEY (`foodID`) REFERENCES `food` (`ID`),
-  ADD CONSTRAINT `foodingredients_ibfk_2` FOREIGN KEY (`ingredientID`) REFERENCES `ingredients` (`ID`);
+ALTER TABLE `ingredients`
+  ADD CONSTRAINT `ingredients_ibfk_1` FOREIGN KEY (`foodID`) REFERENCES `food` (`ID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
