@@ -15,4 +15,8 @@
     <div id="makingof">
         <p class="text-justify">{{recipe.makingof}}</p>
     </div>
+    <div class="row">
+        <button class="btn btn-warning">Szerkesztés</button>
+        <button class="btn btn-danger" (click)="delRecipe(recipe.ID)">Törlés</button>
+    </div>
 </div>

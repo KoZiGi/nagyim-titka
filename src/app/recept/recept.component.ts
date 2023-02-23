@@ -13,6 +13,14 @@ export class ReceptComponent {
   constructor(private service:RecipesService){}
   recipe:Recipe={} as Recipe;
   
+  delRecipe(id:number){
+    this.service.Delete({
+      table:"recipes",
+      field:"ID",
+      value:this.recipe.ID
+    })
+  }
+
   async getdata() {
     await this.service.Get(
       {
