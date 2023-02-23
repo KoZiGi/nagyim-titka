@@ -1,33 +1,31 @@
-import { Component, Input } from '@angular/core';
+import { Component, Injectable, Input, OnInit } from '@angular/core';
 import { Recipe } from '../recipe';
 import { RecipesService } from '../recipes.service';
-
+import { ParamMap, ActivatedRoute } from '@angular/router';
+import { forkJoin, map, mergeMap } from 'rxjs';
 @Component({
   selector: 'app-recept',
   templateUrl: './recept.component.html',
   styleUrls: ['./recept.component.sass']
 })
 export class ReceptComponent {
-  @Input() receptid:number=0;
-  
-  constructor(private service:RecipesService){this.getdata()}
+  number:number = 0;
   recipe:Recipe={} as Recipe;
-  
+
+  constructor(private service:RecipesService, private route:ActivatedRoute){
+    this.route.params.subscribe(d=>{
+      forkJoin([this.service.Get({table:'food', field:'ID', value:d['id']}), this.service.Get({table:'ingredients', field:'foodID', value:d['id']})]).subscribe(d=>{
+        d[0][0].ingredients = d[1]
+        this.recipe = d[0][0];
+        console.log(this.recipe);
+      })
+    })
+  }
   delRecipe(id:number){
     this.service.Delete({
       table:"food",
       field:"ID",
       value:this.recipe.ID
     })
-  }
-
-  async getdata() {
-    await this.service.Get(
-      {
-        table:"food",
-        field: "ID",
-        value:this.receptid
-      }
-    ).then(res=>{res.subscribe(data=>{this.recipe=data[0]})})
   }
 }

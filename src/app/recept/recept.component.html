@@ -1,22 +1,32 @@
 <div>
-    <h2>{{recipe.title}}</h2>
-    <div class="row">
-        <div class="col-4"> <img class="img-thumbnail" src="{{recipe.image}}" alt="{{recipe.title}}"> </div>
-        <div class="col-8"> <p class="text-justify">{{recipe.description}}</p> </div>
-    </div>
-    <div id="ingredients">
-        <div class="form-check" *ngFor="let ingredient in recipe.ingredients">
-            <input class="form-check-input" type="checkbox" value="" id="_{{ingredient.id}}">
-            <label class="form-check-label" for="flexCheckDefault">
-                {{ingredient.name}} - {{ingredient.amount}}{{ingredient.unit}}
-            </label>
+    <div class="container-fluid">
+        <h2>{{recipe.title}}</h2>
+        <div class="row">
+            <!--<div class="col-4"> <img class="img-thumbnail" src="{{recipe.image}}" alt="{{recipe.title}}"> </div>-->
+            <div class="col-8">
+                <p class="text-justify">{{recipe.description}}</p>
+            </div>
         </div>
-    </div>
-    <div id="makingof">
-        <p class="text-justify">{{recipe.makingof}}</p>
-    </div>
-    <div class="row">
-        <button class="btn btn-warning">Szerkesztés</button>
-        <button class="btn btn-danger" (click)="delRecipe(recipe.ID)">Törlés</button>
+        <h3>Hozzávalók</h3>
+        <div id="ingredients">
+            <div class="form-check" *ngFor="let ingredient of recipe.ingredients">
+                <input class="form-check-input" type="checkbox" value="" id="_{{ingredient.ID}}">
+                <label class="form-check-label" for="flexCheckDefault">
+                    {{ingredient.name}} - {{ingredient.amount}}{{ingredient.unit}}
+                </label>
+            </div>
+        </div>
+        <h3>Elkészítési mód</h3>
+        <div id="makingof">
+            <ol>
+                <li *ngFor="let step of recipe.makingof.split('\n')">
+                    {{step}}
+                </li>
+            </ol>
+        </div>
+        <div class="row">
+            <button class="btn btn-warning">Szerkesztés</button>
+            <button class="btn btn-danger" (click)="delRecipe(recipe.ID)">Törlés</button>
+        </div>
     </div>
 </div>

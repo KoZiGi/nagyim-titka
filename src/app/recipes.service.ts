@@ -12,8 +12,8 @@ export class RecipesService {
 
   constructor(private http:HttpClient) { }
 
-  async Get(params:Params):Promise<Observable<any>>{
-    return await this.http.get(this.backendURL, {
+  Get(params:Params):Observable<any>{
+    return this.http.get(this.backendURL, {
       params:params as any
     });
   }
@@ -22,8 +22,8 @@ export class RecipesService {
       headers:{'Content-Type':'application/json'}
     });
   }
-  async Patch(data:Params):Promise<Observable<any>>{
-    return await this.http.patch(this.backendURL, data, {
+  Patch(data:Params):Observable<any>{
+    return this.http.patch(this.backendURL, data, {
       headers:{'Content-Type':'application/json'}
     });
   }

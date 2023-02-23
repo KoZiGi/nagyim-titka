@@ -11,8 +11,8 @@ export class MainComponent {
   constructor(private service:RecipesService){this.getdata()}
   recipes:Recipe[]=[];
   async getdata() {
-    await this.service.Get({
+    this.service.Get({
       table:"food"
-    }).then(res=>{res.subscribe(data=>{this.recipes=data; console.log(this.recipes)})})
+    }).subscribe(data=>{this.recipes=data; console.log(this.recipes)});
   }
 }
