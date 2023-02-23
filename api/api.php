@@ -32,8 +32,10 @@ function POST($db, $data)
                 //INSERTING
                 $insertKeyString = join(",", $insertKeys);
                 $insertValuesString = join(",", $insertValues);
+                $sql = $db->prepare("insert into $table ($insertKeyString) values ($insertValuesString)");
+                $sql->execute();
                 return array(
-                    "inserts" => $db->exec("insert into $table ($insertKeyString) values ($insertValuesString)")
+                    "insertedId" => $db->lastInsertId()
                 );
             }
             catch (PDOException $e){
