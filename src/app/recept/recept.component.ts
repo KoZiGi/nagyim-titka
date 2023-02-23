@@ -15,7 +15,7 @@ export class ReceptComponent {
   
   delRecipe(id:number){
     this.service.Delete({
-      table:"recipes",
+      table:"food",
       field:"ID",
       value:this.recipe.ID
     })
@@ -24,7 +24,7 @@ export class ReceptComponent {
   async getdata() {
     await this.service.Get(
       {
-        table:"recipes",
+        table:"food",
         field: "ID",
         value:this.receptid
       }
