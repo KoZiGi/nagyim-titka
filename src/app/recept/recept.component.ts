@@ -10,7 +10,7 @@ import { RecipesService } from '../recipes.service';
 export class ReceptComponent {
   @Input() receptid:number=0;
   
-  constructor(private service:RecipesService){}
+  constructor(private service:RecipesService){this.getdata()}
   recipe:Recipe={} as Recipe;
   
   delRecipe(id:number){
