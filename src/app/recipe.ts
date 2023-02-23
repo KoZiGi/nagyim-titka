@@ -7,9 +7,8 @@ export interface Recipe {
     ingredients:Ingredient[];
 }
 export interface Ingredient{
-    ID:number;
-    foodID:number;
-    ingredientID:number;
+    ID?:number;
+    foodID?:number;
     name:string;
     amount:number;
     unit:string;
