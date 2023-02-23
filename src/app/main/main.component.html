@@ -2,7 +2,7 @@
 
 <app-upload-modal/>
 
-<div class="container d-flex flex-wrap">
+<div class="container d-flex flex-wrap" (load)="getdata()">
   <div *ngFor="let recipe of recipes" class="card m-2">
     <img src="{{recipe.image}}" class="card-img-top" alt="...">
     <div class="card-body">

@@ -8,11 +8,11 @@ import { RecipesService } from '../recipes.service';
   styleUrls: ['./main.component.sass']
 })
 export class MainComponent {
-  constructor(private service:RecipesService){}
+  constructor(private service:RecipesService){this.getdata()}
   recipes:Recipe[]=[];
   async getdata() {
     await this.service.Get({
-      table:"recipes"
-    }).then(res=>{res.subscribe(data=>{this.recipes=data})})
+      table:"food"
+    }).then(res=>{res.subscribe(data=>{this.recipes=data; console.log(this.recipes)})})
   }
 }
