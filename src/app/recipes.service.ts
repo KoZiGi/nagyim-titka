@@ -27,8 +27,8 @@ export class RecipesService {
       headers:{'Content-Type':'application/json'}
     });
   }
-  async Delete(data:Params):Promise<Observable<any>>{
-    return await this.http.delete(this.backendURL, {
+  Delete(data:Params){
+    return this.http.delete(this.backendURL, {
       body:data
     });
   }

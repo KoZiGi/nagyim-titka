@@ -3,7 +3,6 @@ export interface Recipe {
     title:string;
     description:string;
     makingof:string;
-    image:string;
     ingredients:Ingredient[];
 }
 export interface Ingredient{

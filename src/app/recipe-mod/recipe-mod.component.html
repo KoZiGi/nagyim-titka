@@ -1,0 +1,33 @@
+<div class="col-8 mx-auto">
+        <h3>Étel Frissítése</h3>
+        <div class="mb-3">
+            <label class="form-label">Étel neve</label>
+            <input type="text" class="form-control" [(ngModel)]="ThisRecipe.title">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Étel Leírása</label>
+            <textarea class="form-control" [(ngModel)]="ThisRecipe.description"></textarea>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Étel Elkészítése</label>
+            <textarea class="form-control" [(ngModel)]="ThisRecipe.makingof"></textarea>
+        </div>
+        <div class="border p-3">
+            <h3>Hozzávalók</h3>
+            <div class="mb-3">
+                <label class="form-label">Hozzávaló neve:</label>
+                <input type="text" class="form-control" placeholder="Búzaliszt" [(ngModel)]="newIngredient.name">
+            </div>
+            <label class="form-label">Hozzávaló mennyiség - mértékegysége:</label>
+            <div class="mb-3 input-group">
+                <input type="number" class="form-control" placeholder="500" [(ngModel)]="newIngredient.amount">
+                <span class="input-group-text">-</span>
+                <input type="text" class="form-control" placeholder="kg" [(ngModel)]="newIngredient.unit">
+            </div>
+            <button class="btn btn-primary" (click)="AddIngredient()"><i class="bi bi-plus-lg"></i> Hozzáadás</button>
+            <div class="recipes">
+                <div class="ingredient" @fade *ngFor="let ingredient of ThisRecipe.ingredients; index as i;">{{ingredient.name}} - {{ingredient.amount}} {{ingredient.unit}} <i (click)="DeleteIngredient(i)" class="bi bi-x-lg"></i></div>
+            </div>
+        </div>
+        <button class="mt-3  btn btn-warning">Megerősítés</button>
+</div>

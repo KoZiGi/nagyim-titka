@@ -11,6 +11,7 @@ import { BodyComponent } from './body/body.component';
 import { MainComponent } from './main/main.component';
 import { FormsModule } from '@angular/forms';
 import { ReceptComponent } from './recept/recept.component';
+import { RecipeModComponent } from './recipe-mod/recipe-mod.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { ReceptComponent } from './recept/recept.component';
     UploadModalComponent,
     BodyComponent,
     MainComponent,
-    ReceptComponent
+    ReceptComponent,
+    RecipeModComponent
   ],
   imports: [
     BrowserModule,
