@@ -35,16 +35,25 @@ export class RecipeModComponent {
       })
     })
   }
-
+  Mod(){
+    
+  }
   AddIngredient(){
     this.ThisRecipe.ingredients.push({
       amount: this.newIngredient.amount,
       unit: this.newIngredient.unit,
       name:this.newIngredient.name
     });
+    this.service.Post({table:"ingredients",data:{
+      foodID:this.ThisRecipe.ID,
+      amount: this.newIngredient.amount,
+      unit: this.newIngredient.unit,
+      name:this.newIngredient.name
+    }}).subscribe()
   }
 
   DeleteIngredient(id:number){
     this.ThisRecipe.ingredients.splice(id, 1);
+    this.service.Delete({table:"ingredients",field:"ID",value:id}).subscribe()
   }
 }

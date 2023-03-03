@@ -29,5 +29,5 @@
                 <div class="ingredient" @fade *ngFor="let ingredient of ThisRecipe.ingredients; index as i;">{{ingredient.name}} - {{ingredient.amount}} {{ingredient.unit}} <i (click)="DeleteIngredient(i)" class="bi bi-x-lg"></i></div>
             </div>
         </div>
-        <button class="mt-3  btn btn-warning">Megerősítés</button>
+        <button class="mt-3  btn btn-warning" (click)="Mod()">Megerősítés</button>
 </div>
