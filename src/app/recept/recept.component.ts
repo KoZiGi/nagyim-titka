@@ -22,6 +22,9 @@ export class ReceptComponent {
     })
   }
   async delRecipe(id:number){
+    await this.recipe.ingredients.forEach(element => {
+      this.service.Delete({table:"ingredients",field:"ID",value:element.ID}).subscribe()
+    });
     this.service.Delete({
       table:"food",
       field:"ID",
