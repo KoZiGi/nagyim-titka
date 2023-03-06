@@ -26,7 +26,7 @@ export class RecipeModComponent {
   ThisRecipe:Recipe={} as Recipe
   newIngredient:Ingredient = {} as Ingredient;
 
-  constructor(private service:RecipesService,private route:ActivatedRoute ){
+  constructor(private service:RecipesService,private route:ActivatedRoute ,private router:Router){
     this.route.params.subscribe(d=>{
       forkJoin([this.service.Get({table:'food', field:'ID', value:d['id']}), this.service.Get({table:'ingredients', field:'foodID', value:d['id']})]).subscribe(d=>{
         d[0][0].ingredients = d[1]
@@ -36,7 +36,8 @@ export class RecipeModComponent {
     })
   }
   Mod(){
-    
+    this.service.Patch({table:"food",data:{title:this.ThisRecipe.title,description:this.ThisRecipe.description,makingof:this.ThisRecipe.makingof},field:"ID",value:this.ThisRecipe.ID}).subscribe()
+    this.router.navigate(['/']);
   }
   AddIngredient(){
     this.ThisRecipe.ingredients.push({
